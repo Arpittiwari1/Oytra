@@ -1,29 +1,38 @@
-# 📋 Signup Data Cleaner using pandas
+# Signup Data Cleaner using pandas
 
-A Python script that cleans and processes raw signup CSV data.
+It:
 
-It standardizes dates, removes low-quality/test entries, normalizes emails (including Gmail handling), deduplicates users, and exports clean member data.
+* Fixes dates (supports multiple formats + "yesterday")
+* Normalizes emails (handles Gmail dots and + aliases)
+* Removes test/fake entries
+* Deduplicates users by email
+* Exports cleaned results and quarantined records
+
+## Requirements
+
+```
+pandas
+```
+
+## Run
+
+Put `signup.csv` in the folder and run:
+
+```
+python script.py
+```
+
+It will generate:
+
+* `members_final.csv`
+* `quarantine.csv`
 
 ---
 
-## 🚀 Features
+Simple utility script for cleaning member signup data.
 
-* ✅ Handles messy CSV files
-* ✅ Standardizes column names
-* ✅ Parses multiple date formats
-* ✅ Supports `"yesterday"` as a signup date
-* ✅ Normalizes Gmail addresses (removes dots and `+` aliases)
-* ✅ Detects and quarantines fake/test entries
-* ✅ Deduplicates users by email
-* ✅ Flags users with multiple plan types
-* ✅ Exports:
 
-  * `members_final.csv`
-  * `quarantine.csv`
-
----
-
-## 📂 Project Structure
+##  Project Structure
 
 ```
 .
@@ -35,15 +44,6 @@ It standardizes dates, removes low-quality/test entries, normalizes emails (incl
 ```
 
 ---
-
-## 📥 Input Format
-
-The script expects a CSV file named:
-
-```
-signup.csv
-```
-
 With at least 5 columns:
 
 | name | email | signup_date | plan | notes |
@@ -58,25 +58,19 @@ Jane Smith,jane@gmail.com,yesterday,Premium,test entry
 
 ---
 
-## 📤 Output Files
-
-### 1️⃣ `members_final.csv`
-
-Cleaned and deduplicated member list.
-
 Columns:
 
 | name | email | signup_date | plan | notes | is_multi_plan |
 
 ---
 
-### 2️⃣ `quarantine.csv`
+###  `quarantine.csv`
 
 Contains low-quality or suspicious entries that were filtered out.
 
 ---
 
-## 🛠 Installation
+## Installation
 
 ### 1. Clone the repository
 
@@ -101,30 +95,14 @@ pip install -r requirements.txt
 
 ---
 
-## 📦 requirements.txt
+##  requirements.txt
 
 ```
-pandas>=1.5.0
+pandas
 ```
 
 ---
 
-## ▶️ Usage
-
-Place your `signup.csv` file in the project folder, then run:
-
-```bash
-python script.py
-```
-
-After execution, you will see:
-
-* `members_final.csv`
-* `quarantine.csv`
-
-generated in the same directory.
-
----
 
 ## 🧠 How It Works
 
@@ -136,37 +114,6 @@ generated in the same directory.
 6. Sorts by latest signup date
 7. Deduplicates users by normalized email
 8. Exports cleaned results
-
----
-
-## 🔍 Low-Quality Detection Rules
-
-Entries are flagged if:
-
-* Name/email/notes contain:
-
-  * `test`
-  * `fake`
-  * `ignore`
-  * `asdf`
-* Email patterns like:
-
-  * `test@`
-  * `@example.com`
-  * `test.`
-
----
-
-## 📌 Notes
-
-* Gmail normalization removes:
-
-  * Dots in the local part
-  * Anything after `+`
-* Oldest fallback date used for sorting: `1900-01-01`
-* Invalid dates are safely handled
-
----
 
 ## 📄 License
 
